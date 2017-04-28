@@ -1,0 +1,173 @@
+/* PROBLEM 1 BEGIN */
+
+CREATE TABLE label (
+  lbltitle VARCHAR(30),
+  lblstreet VARCHAR(30),
+  lblcity VARCHAR(30),
+  lblstate VARCHAR(30),
+  lblpostcode VARCHAR(30),
+  lblnation VARCHAR(30),
+
+  PRIMARY KEY (lbltitle)
+);
+
+CREATE TABLE cd (
+  cdid INT,
+  cdlblid VARCHAR(30),
+  cdtitle VARCHAR(30),
+  cdyear YEAR,
+  lbltitle VARCHAR(30),
+
+  PRIMARY KEY (cdid),
+
+  CONSTRAINT fk_has_label FOREIGN KEY(lbltitle)
+  REFERENCES label (lbltitle)
+);
+
+CREATE TABLE person (
+  psnid INT,
+  psnfname VARCHAR(30),
+  psnlname VARCHAR(30),
+
+  PRIMARY KEY (psnid)
+);
+
+CREATE TABLE composition (
+  compid INT,
+  comptitle VARCHAR(30),
+  compyear YEAR,
+
+  PRIMARY KEY (compid)
+);
+
+CREATE TABLE person_cd (
+  psncdorder INT,
+  psnid INT,
+  cdid INT,
+
+  PRIMARY KEY (psnid, cdid),
+
+  CONSTRAINT fk_has_person FOREIGN KEY(psnid)
+      REFERENCES person (psnid),
+
+  CONSTRAINT fk_has_cd FOREIGN KEY(cdid)
+      REFERENCES cd (cdid)
+);
+
+CREATE TABLE person_composition (
+  psncomprole VARCHAR(30),
+  psncomporder INT,
+  psnid INT,
+  compid INT,
+
+  PRIMARY KEY (psncomprole, psnid, compid),
+
+  CONSTRAINT fk_has_person2 FOREIGN KEY(psnid)
+      REFERENCES person (psnid),
+
+  CONSTRAINT fk_has_composition2 FOREIGN KEY(compid)
+      REFERENCES composition (compid)
+);
+
+CREATE TABLE recording (
+  rcdid INT,
+  rcdlength DECIMAL (5,2),
+  rcddate DATE,
+  compid INT,
+
+  PRIMARY KEY (rcdid, compid),
+
+  CONSTRAINT fk_has_composition3 FOREIGN KEY(compid)
+      REFERENCES composition (compid)
+);
+
+CREATE TABLE track (
+  cdid INT,
+  trknum INT,
+  rcdid INT,
+  compid INT,
+
+  PRIMARY KEY (trknum, cdid),
+
+  CONSTRAINT fk_has_cd5 FOREIGN KEY(cdid)
+  REFERENCES cd (cdid),
+    
+  CONSTRAINT fk_has_recording5 FOREIGN KEY(rcdid, compid)
+  REFERENCES recording (rcdid, compid)
+);
+
+CREATE TABLE person_recording (
+  psnrcdrole VARCHAR(30),
+  psnid INT,
+  rcdid INT,
+  compid INT,
+
+  PRIMARY KEY (psnrcdrole, psnid, rcdid),
+
+  CONSTRAINT fk_has_person6 FOREIGN KEY(psnid)
+  REFERENCES person (psnid),
+    
+  CONSTRAINT fk_has_recording6 FOREIGN KEY(rcdid, compid)
+  REFERENCES recording (rcdid, compid)
+);
+
+/* PROBLEM 1 END */
+
+/* PROBLEM 2 BEGIN */
+SELECT trknum, comptitle
+FROM track 
+JOIN composition ON track.compid = composition.compid
+WHERE track.cdid = 1
+ORDER BY trknum ASC;
+/* PROBLEM 2 END */
+
+/* PROBLEM 3 BEGIN */
+SELECT psnfname, psnlname, psnrcdrole
+FROM person
+JOIN person_recording
+ON person.psnid = person_recording.psnid
+JOIN recording 
+ON recording.rcdid = person_recording.rcdid
+WHERE recording.rcdid = 1;
+/* PROBLEM 3 END */
+
+/* PROBLEM 4 BEGIN */
+SELECT psnfname, psnlname
+FROM person
+JOIN person_recording
+ON person.psnid = person_recording.psnid
+JOIN recording
+ON recording.rcdid = person_recording.rcdid
+JOIN person_composition
+ON person_composition.compid = recording.compid
+WHERE person_composition.psncomprole REGEXP 'music'
+AND
+person_recording.psnrcdrole REGEXP 'tenor sax';
+/* PROBLEM 4 END */
+
+/* PROBLEM 5 BEGIN */
+SELECT comptitle, trknum, cd.cdtitle FROM track, composition, cd
+WHERE track.compid = composition.compid AND track.cdid = cd.cdid
+AND EXISTS (SELECT trknum FROM track
+    WHERE track.cdid = cd.cdid
+    AND track.compid = composition.compid
+    HAVING COUNT(compid) > 1)
+GROUP BY trknum
+ORDER BY trknum ASC;
+/* PROBLEM 5 END */
+
+/* PROBLEM 6 BEGIN */
+SELECT recording.rcdid, recording.rcddate FROM recording
+WHERE NOT EXISTS (SELECT * FROM cd
+WHERE NOT EXISTS (SELECT * FROM track
+WHERE track.cdid = cd.cdid 
+AND track.rcdid = recording.rcdid));
+/* PROBLEM 6 END */
+
+/* PROBLEM 7 BEGIN */
+SELECT recording.rcdid, recording.rcddate FROM recording
+JOIN track ON recording.rcdid = track.rcdid
+    GROUP BY recording.rcdid, recording.rcddate
+    HAVING COUNT(DISTINCT cdid) =
+(SELECT COUNT(DISTINCT cdid) FROM cd);
+/* PROBLEM 7 END */
