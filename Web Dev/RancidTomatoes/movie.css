@@ -1,0 +1,173 @@
+/*
+Name: Carlyn Marshall
+Assignment: PHP and HTML
+Date: April 3rd, 2017
+The CSS file for movie.html
+
+*/
+html{
+	background-image: url("http://cs.millersville.edu/~sschwartz/366/HTML_CSS_Lab/Images/background.png")
+}
+body {
+	padding:0;
+	margin:0;
+}
+#title{
+	font-size: 24pt;
+	font-weight: bold;
+	font-family: Tahoma, Verdana, sans-serif;
+	text-shadow: 3px 3px #999999;
+}
+
+#bannerbg {
+	height: 50px;
+	background-image: url("http://cs.millersville.edu/~sschwartz/366/HTML_CSS_Lab/Images/bannerbg.png");
+	background-repeat: repeat-x;
+}
+
+#banner {
+	display:block;
+	margin:auto;
+}
+
+#title{
+	text-align: center;
+	font-weight: bold;
+	font-size: 24pt;
+}
+
+.box {
+	width: 800px;
+	display: block;
+	margin:auto;
+	border: 4px solid gray;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+
+
+/*******************************************************************************************************************************/
+/*left side*/
+
+.scorebanner {
+	width: 550px;
+	display: block;
+	background-image: url("http://cs.millersville.edu/~sschwartz/366/HTML_CSS_Lab/Images/rbg.png");
+	background-repeat: repeat-x;
+	height: 83px;
+	font-weight: bold;
+	color:red;
+	font-size:48pt;
+	border-top-left-radius: 15px;
+	/*clear:left;*/
+}
+
+
+#rottenbig {
+	display:block;
+	height: 83px;
+	border-top-left-radius: 15px;
+	float:left;
+}
+
+.review {
+	width:550px;
+	overflow: auto;
+}
+
+
+.leftColumn {
+	float: left;
+	width:47%;
+	margin: 0% 2% 2% 2%;
+	overflow: auto;
+}
+
+.rightColumn {
+	overflow: auto;
+	width:47%;
+	margin:2% 2% 2% 2%;
+}
+
+.comments {
+	font-size: 9pt;
+	font-weight: bold;
+	background-color:#E8DC9B;
+	border:2px solid gray;
+	border-radius: 10px;
+	padding:8px 8px 8px 8px;
+	overflow:hidden;
+	margin:0;
+}
+.comments img {
+	padding-right: 5px;
+	float:left;
+}
+
+.critic{
+	display:block;
+	padding-bottom: 20pt;
+}
+
+.critic img{
+	float:left;
+	padding-right:5px;
+}
+
+.publication {
+	font-style: italic;
+}
+
+/*******************************************************************************************************************************/
+/*right side*/
+
+#poster {
+	float:right;
+	border-top-right-radius: 15px;
+	overflow: auto;
+}
+
+.overview {
+	display: block;
+	width:250px;
+	float:right;
+	overflow: hidden;
+	background-color: #A2B964;
+}
+
+#overviewText {
+	display:block;
+	float:right;
+	overflow: hidden;
+	padding-left:10pt;
+	padding-right:10pt;
+	font-family: Arial, sans-serif;
+	font-size:8pt;
+
+}
+
+dt {
+	font-weight: bold;
+	padding-top: 10pt;
+}
+#links {
+	list-style: none;
+	padding-left: 0;
+}
+
+#bottombar {
+	clear: left;
+	clear:right;
+	text-align: center;
+	background-color: #A2B964;
+	margin:0;
+	padding:5px;
+}
+
+#validators{
+	position:fixed;
+	bottom: 0;
+	right:0;
+	opacity: 0.5;
+}
