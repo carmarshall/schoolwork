@@ -110,7 +110,6 @@ CREATE TABLE person_recording (
   CONSTRAINT fk_has_recording6 FOREIGN KEY(rcdid, compid)
   REFERENCES recording (rcdid, compid)
 );
-
 /* PROBLEM 1 END */
 
 /* PROBLEM 2 BEGIN */
