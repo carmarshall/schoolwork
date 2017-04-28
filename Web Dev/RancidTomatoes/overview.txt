@@ -1,0 +1,5 @@
+A Web Development assignment I completed at Millersville University.
+I wrote PHP code for movie review pages. The emphasis on this assignment was that the PHP code allows you to generate reviews for a variety of movies using the same code. 
+
+The movie.php file contains the PHP code to produce review pages for movies
+The movie.css file contains the style sheet for movie.php
