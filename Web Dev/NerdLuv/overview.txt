@@ -1,0 +1,2 @@
+This is a project from my Web Development course at Millersville University.
+This repo contains the code I wrote for a simple multi-page "online dating" site that processes HTML forms with PHP.
