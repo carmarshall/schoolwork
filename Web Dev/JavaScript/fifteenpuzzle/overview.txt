@@ -1,0 +1,1 @@
+This is a JavaScript/JSON implementation of the 'sliding puzzle game'
