@@ -1,0 +1,60 @@
+/*
+Name : Carlyn Marshall
+Date : May 5th 2017
+Course: CSCI 366 - Web Development
+Assignment: Fifteen Puzzle
+
+CSS FILE
+*/
+
+body {
+  font-family: cursive;
+  font-size: 14pt;
+  text-align: center;
+}
+
+#puzzlearea {
+  display: block;
+  width: 400px;
+  height: 400px;
+  font-size: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+}
+
+.tile {
+  position: absolute;
+  border: 3px solid black;
+  height: 90px;
+  width: 90px;
+  margin: 2px;
+  background-image: url(img.jpg);
+  color: white;
+}
+
+
+
+.movableTile:hover {
+  color: red;
+  border: 3px solid red;
+}
+
+
+.blank {
+  position: absolute;
+  border: 3px solid white;
+  height: 90px;
+  width: 90px;
+  margin: 2px;
+}
+
+
+#controls, p, button{
+  font-size: 14px;
+}
+
+#shufflebutton{
+  cursor: pointer;
+
+}
